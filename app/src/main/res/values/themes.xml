@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. Compose owns the actual theming (see presentation/theme),
+         this XML theme exists for the window background / system bars before Compose loads. -->
+    <style name="Theme.CiviQ" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/civiq_background_light</item>
+    </style>
+
+    <!-- Splash screen theme using the AndroidX SplashScreen API -->
+    <style name="Theme.CiviQ.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/civiq_splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.CiviQ</item>
+    </style>
+</resources>

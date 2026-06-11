@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">CiviQ</string>
+    <string name="app_tagline">Learn Politics. Think Critically. Have Fun.</string>
+    <string name="default_notification_channel_id">civiq_general_channel</string>
+    <string name="default_notification_channel_name">CiviQ Notifications</string>
+
+    <!-- Auth -->
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_sign_up">Create Account</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="action_continue_as_guest">Continue as Guest</string>
+    <string name="action_continue_with_google">Continue with Google</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_confirm_password">Confirm Password</string>
+    <string name="label_display_name">Display Name</string>
+    <string name="label_or">OR</string>
+    <string name="label_no_account">Don\'t have an account? </string>
+    <string name="label_password_requirements">Must be at least 8 characters and include a letter and a number.</string>
+    <string name="action_forgot_password">Forgot Password?</string>
+    <string name="action_forgot_password_title">Reset Password</string>
+    <string name="action_reset_password">Send Reset Link</string>
+    <string name="label_forgot_password_instructions">Enter the email address associated with your account and we\'ll send you a link to reset your password.</string>
+    <string name="label_password_reset_sent">Password reset link sent! Check your inbox.</string>
+
+    <!-- Onboarding -->
+    <string name="action_skip">Skip</string>
+    <string name="action_next">Next</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="onboarding_title_1">Learn Civics, the Fun Way</string>
+    <string name="onboarding_desc_1">Master democracy, elections, and governance through bite-sized quizzes you\'ll actually enjoy.</string>
+    <string name="onboarding_title_2">Earn XP, Coins &amp; Badges</string>
+    <string name="onboarding_desc_2">Level up from Civic Rookie to Civic Champion as you build your knowledge and streaks.</string>
+    <string name="onboarding_title_3">AI-Powered Daily Challenges</string>
+    <string name="onboarding_desc_3">Get fresh, AI-generated questions tailored to your country, tone, and interests every day.</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_quiz">Quiz</string>
+    <string name="nav_leaderboard">Leaderboard</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_challenges">Challenges</string>
+
+    <!-- Home -->
+    <string name="home_greeting_morning">Good morning, %1$s!</string>
+    <string name="home_greeting_afternoon">Good afternoon, %1$s!</string>
+    <string name="home_greeting_evening">Good evening, %1$s!</string>
+    <string name="home_default_name">Citizen</string>
+    <string name="home_level_label">Level %1$d · %2$s</string>
+    <string name="home_xp_to_next_level">%1$d XP to Level %2$d</string>
+    <string name="home_max_level">Max level reached!</string>
+    <string name="home_coins_label">Coins</string>
+    <string name="home_streak_label">Day Streak</string>
+    <string name="home_daily_challenge_title">Today\'s Challenge</string>
+    <string name="home_daily_challenge_reward">+%1$d XP · +%2$d Coins</string>
+    <string name="home_daily_challenge_completed">Completed</string>
+    <string name="home_daily_challenge_start">Start Challenge</string>
+    <string name="home_daily_challenge_error">Couldn\'t load today\'s challenge. Please try again later.</string>
+    <string name="home_continue_learning_title">Continue Learning</string>
+    <string name="home_continue_learning_subtitle">%1$s difficulty</string>
+    <string name="home_start_learning_title">Start Your Civic Journey</string>
+    <string name="home_start_learning_subtitle">Pick a category and put your knowledge to the test.</string>
+    <string name="home_browse_categories">Browse Categories</string>
+    <string name="home_recent_achievements">Recent Achievements</string>
+    <string name="home_no_achievements_title">No badges yet</string>
+    <string name="home_no_achievements_subtitle">Complete quizzes to earn your first achievement!</string>
+
+    <!-- Quiz -->
+    <string name="quiz_hub_title">Quiz</string>
+    <string name="quiz_hub_free_attempts">%1$d free quizzes left today</string>
+    <string name="quiz_hub_unlimited">Unlimited quizzes (Premium)</string>
+    <string name="quiz_difficulty_select_title">Select Difficulty</string>
+    <string name="quiz_difficulty_xp_multiplier">%1$sx XP</string>
+    <string name="quiz_question_progress">Question %1$d of %2$d</string>
+    <string name="quiz_no_questions">No questions available yet for this category and difficulty. Try another combination!</string>
+    <string name="quiz_explanation_label">Explanation</string>
+    <string name="quiz_action_next">Next</string>
+    <string name="quiz_action_finish">Finish</string>
+    <string name="quiz_result_title">Quiz Complete!</string>
+    <string name="quiz_result_score">%1$d / %2$d correct</string>
+    <string name="quiz_result_xp_earned">+%1$d XP</string>
+    <string name="quiz_result_coins_earned">+%1$d Coins</string>
+    <string name="quiz_result_perfect">Perfect Score!</string>
+    <string name="quiz_result_done">Done</string>
+    <string name="quiz_result_retry">Try Again</string>
+    <string name="quiz_history_title">Quiz History</string>
+    <string name="quiz_history_empty_title">No quizzes yet</string>
+    <string name="quiz_history_empty_subtitle">Complete a quiz to see your history here.</string>
+    <string name="quiz_history_item_subtitle">%1$d/%2$d correct · %3$s</string>
+
+    <!-- Common -->
+    <string name="common_retry">Retry</string>
+    <string name="common_loading">Loading…</string>
+    <string name="common_error_generic">Something went wrong. Please try again.</string>
+    <string name="common_error_network">No internet connection. Please check your network.</string>
+    <string name="common_empty_state">Nothing here yet.</string>
+    <string name="common_continue">Continue</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_done">Done</string>
+</resources>

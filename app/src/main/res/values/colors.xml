@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand colors used by XML themes (Splash screen, notification icon tint, etc.)
+         The Compose UI uses presentation/theme/Color.kt as the source of truth. -->
+    <color name="civiq_primary">#2D5BFF</color>
+    <color name="civiq_on_primary">#FFFFFF</color>
+    <color name="civiq_secondary">#FFB100</color>
+    <color name="civiq_background_light">#FFFFFF</color>
+    <color name="civiq_background_dark">#121212</color>
+    <color name="civiq_splash_background">#2D5BFF</color>
+</resources>
