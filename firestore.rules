@@ -1,0 +1,110 @@
+rules_version = '2';
+
+// CiviQ Firestore security rules.
+//
+// Schema reference: docs/DATABASE.md
+// Roles (users/{uid}.role): GUEST, REGISTERED, PREMIUM, ADMIN
+//
+// Cloud Functions use the Admin SDK and bypass these rules entirely, so
+// "Admin/Cloud-Function-only" writes below are enforced here only against
+// direct client access.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function role() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && role() == 'ADMIN';
+    }
+
+    // Fields a user must never be able to change on their own profile.
+    function userSelfUpdateIsSafe() {
+      return !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['role', 'xp', 'coins', 'level', 'isPremium', 'premiumExpiresAt']);
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isAdmin() || (isOwner(userId) && userSelfUpdateIsSafe());
+      allow delete: if isAdmin();
+
+      match /user_achievements/{achievementId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow write: if isOwner(userId) || isAdmin();
+      }
+
+      match /devices/{token} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /daily_challenge_progress/{date} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    match /questions/{questionId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /quiz_attempts/{attemptId} {
+      allow read: if isSignedIn() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() &&
+        request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    match /daily_challenges/{date} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /achievements/{achievementId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /leaderboards/{bucketId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+
+      match /entries/{userId} {
+        allow read: if isSignedIn();
+        allow write: if isAdmin();
+      }
+    }
+
+    match /notifications/{notificationId} {
+      allow read, update: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create, delete: if isAdmin();
+    }
+
+    match /subscriptions/{subscriptionId} {
+      allow read: if isSignedIn() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /feature_flags/{key} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /reports/{reportId} {
+      allow read, update, delete: if isAdmin();
+      allow create: if isSignedIn() && request.resource.data.reportedBy == request.auth.uid;
+    }
+  }
+}

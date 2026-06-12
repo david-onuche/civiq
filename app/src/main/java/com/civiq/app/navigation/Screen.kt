@@ -78,6 +78,7 @@ sealed class Screen(val route: String) {
     }
     data object AdminChallenges : Screen("admin_challenges")
     data object AdminAchievements : Screen("admin_achievements")
+    data object AdminFeatureFlags : Screen("admin_feature_flags")
 
     companion object {
         const val ARG_CATEGORY = "category"

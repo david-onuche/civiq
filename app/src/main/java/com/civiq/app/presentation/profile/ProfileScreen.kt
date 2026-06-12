@@ -74,6 +74,7 @@ fun ProfileScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToPremium: () -> Unit,
     onNavigateToAiCoach: () -> Unit,
+    onNavigateToAdminDashboard: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel(),
     authViewModel: AuthViewModel = hiltViewModel(),
 ) {
@@ -139,6 +140,13 @@ fun ProfileScreen(
                         title = stringResource(R.string.profile_menu_settings),
                         onClick = onNavigateToSettings,
                     )
+                    if (user.isAdmin) {
+                        ProfileMenuItem(
+                            icon = Icons.Filled.AdminPanelSettings,
+                            title = stringResource(R.string.admin_dashboard_title),
+                            onClick = onNavigateToAdminDashboard,
+                        )
+                    }
                     ProfileMenuItem(
                         icon = Icons.AutoMirrored.Filled.Logout,
                         title = stringResource(R.string.action_sign_out),

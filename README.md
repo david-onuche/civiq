@@ -24,6 +24,22 @@ to create an experience that is both educational and entertaining.
 
 Whether you're preparing to vote for the first time, learning about your constitution, exploring public policy, or simply testing your political knowledge, CiviQ helps you learn through play.
 
+## Getting Started (Developers)
+
+CiviQ's MVP is a native Android app (Kotlin + Jetpack Compose) backed by
+Firebase. To build it locally:
+
+1. Clone the repo and open it in Android Studio.
+2. Follow [docs/SETUP.md](docs/SETUP.md) to create a Firebase project, enable
+   Auth/Firestore/Cloud Messaging, deploy `firestore.rules` and
+   `firestore.indexes.json`, and configure `local.properties`.
+3. Run the `devDebug` build variant.
+
+For a tour of how the codebase is organized (Clean Architecture + MVVM
+layers, DI, navigation, AI integration), see
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). For the full Firestore schema,
+see [docs/DATABASE.md](docs/DATABASE.md).
+
 ## Vision
 
 To become the world's most engaging civic learning platform, empowering millions of citizens with the knowledge needed to participate meaningfully in democratic societies.
@@ -171,24 +187,32 @@ We welcome developers, designers, researchers, civic educators, policy experts, 
 1. Kotlin
 2. Jetpack Compose
 3. Material Design 3
+4. MVVM + Clean Architecture (presentation / domain / data layers, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md))
+5. Hilt (dependency injection)
+6. Kotlin Coroutines & Flow
+7. Navigation Compose
+8. Coil (image loading)
+9. Jetpack DataStore (local preferences)
 
 ## Backend
 
-1. Firebase
+1. Firebase (Auth, Firestore, Cloud Messaging, Crashlytics, Performance, Analytics)
 2. Cloud Functions
+3. Retrofit (AI provider APIs)
 
 ## Artificial Intelligence
 
-1. OpenAI API
-2. Gemini API
+1. Gemini API
+2. OpenAI API
 
 ## Database
 
-1. Cloud Firestore
+1. Cloud Firestore (Native mode) — schema documented in [docs/DATABASE.md](docs/DATABASE.md)
 
 ## Authentication
 
-1. Firebase Authentication
+1. Firebase Authentication (Email/Password, Google Sign-In, Anonymous/Guest)
+2. Role-based access control: Guest, Registered, Premium, Admin
 
 ## Analytics
 
@@ -197,6 +221,14 @@ We welcome developers, designers, researchers, civic educators, policy experts, 
 ## Notifications
 
 1. Firebase Cloud Messaging
+2. WorkManager (scheduled daily reminders)
+
+## Testing
+
+1. JUnit4
+2. MockK
+3. Turbine
+4. Truth
 
 ## Payments
 
@@ -257,11 +289,13 @@ We welcome contributions from:
 7. Students
 8. Volunteers
 
-Please review the CONTRIBUTING.md guide before submitting issues or pull requests.
+Please review the [CONTRIBUTING.md](CONTRIBUTING.md) guide before submitting
+issues or pull requests, and note our [Code of Conduct](CODE_OF_CONDUCT.md).
+To report a security vulnerability, see [SECURITY.md](SECURITY.md).
 
 # License
 
-Licensed under the Apache License 2.0.
+Licensed under the [Apache License 2.0](LICENSE).
 
 # Motto
 

@@ -1,0 +1,71 @@
+name: Quiz content proposal
+description: Propose new quiz questions or a content pack (e.g. country-specific civics content).
+title: "[Quiz content]: "
+labels: ["content", "quiz-content"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thanks for contributing quiz content! Please read the
+        [Contributing quiz content](../../CONTRIBUTING.md#contributing-quiz-content)
+        section before submitting — questions must be factually accurate and
+        politically neutral/non-partisan, even for `SATIRICAL`/`FUNNY` tone.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: See QuizCategory in docs/DATABASE.md.
+      options:
+        - DEMOCRACY
+        - ELECTIONS
+        - GOVERNANCE
+        - CONSTITUTIONS
+        - PUBLIC_POLICY
+        - POLITICAL_HISTORY
+        - INTERNATIONAL_RELATIONS
+        - CIVIC_RESPONSIBILITY
+    validations:
+      required: true
+
+  - type: input
+    id: country
+    attributes:
+      label: Country / region (if applicable)
+      placeholder: e.g. Nigeria, Kenya, "Global"
+    validations:
+      required: false
+
+  - type: textarea
+    id: difficulty
+    attributes:
+      label: Difficulty spread
+      description: Roughly how many questions at each difficulty level (EASY / MEDIUM / HARD)?
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources / citations
+      description: Links or references supporting the factual accuracy of these questions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample questions (optional)
+      description: A few example questions with answers and explanations.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checks
+      options:
+        - label: These questions are factually accurate and politically neutral / non-partisan.
+          required: true
+        - label: I searched existing issues and didn't find a duplicate proposal.
+          required: true

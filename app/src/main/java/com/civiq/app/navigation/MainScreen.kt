@@ -26,6 +26,14 @@ import androidx.navigation.navArgument
 import com.civiq.app.R
 import com.civiq.app.domain.model.QuizCategory
 import com.civiq.app.presentation.achievements.AchievementsScreen
+import com.civiq.app.presentation.admin.AdminAchievementsScreen
+import com.civiq.app.presentation.admin.AdminChallengesScreen
+import com.civiq.app.presentation.admin.AdminDashboardScreen
+import com.civiq.app.presentation.admin.AdminFeatureFlagsScreen
+import com.civiq.app.presentation.admin.AdminQuestionEditorScreen
+import com.civiq.app.presentation.admin.AdminQuestionsScreen
+import com.civiq.app.presentation.admin.AdminUserDetailScreen
+import com.civiq.app.presentation.admin.AdminUsersScreen
 import com.civiq.app.presentation.aicoach.AiCoachScreen
 import com.civiq.app.presentation.challenges.ChallengesScreen
 import com.civiq.app.presentation.components.CiviQTopAppBar
@@ -159,6 +167,7 @@ fun MainScreen(onSignedOut: () -> Unit, pendingDeepLinkRoute: String? = null) {
                     onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
                     onNavigateToPremium = { navController.navigate(Screen.Premium.route) },
                     onNavigateToAiCoach = { navController.navigate(Screen.AiCoach.route) },
+                    onNavigateToAdminDashboard = { navController.navigate(Screen.AdminDashboard.route) },
                 )
             }
             composable(Screen.EditProfile.route) {
@@ -187,6 +196,58 @@ fun MainScreen(onSignedOut: () -> Unit, pendingDeepLinkRoute: String? = null) {
                     onBackClick = { navController.popBackStack() },
                     onNavigateToPremium = { navController.navigate(Screen.Premium.route) },
                 )
+            }
+            composable(Screen.AdminDashboard.route) {
+                AdminDashboardScreen(
+                    onBackClick = { navController.popBackStack() },
+                    onNavigateToUsers = { navController.navigate(Screen.AdminUsers.route) },
+                    onNavigateToQuestions = { navController.navigate(Screen.AdminQuestions.route) },
+                    onNavigateToChallenges = { navController.navigate(Screen.AdminChallenges.route) },
+                    onNavigateToAchievements = { navController.navigate(Screen.AdminAchievements.route) },
+                    onNavigateToFeatureFlags = { navController.navigate(Screen.AdminFeatureFlags.route) },
+                )
+            }
+            composable(Screen.AdminUsers.route) {
+                AdminUsersScreen(
+                    onBackClick = { navController.popBackStack() },
+                    onUserClick = { userId -> navController.navigate(Screen.AdminUserDetail.createRoute(userId)) },
+                )
+            }
+            composable(
+                route = Screen.AdminUserDetail.route,
+                arguments = listOf(navArgument(Screen.ARG_USER_ID) { type = NavType.StringType }),
+            ) {
+                AdminUserDetailScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable(Screen.AdminQuestions.route) {
+                AdminQuestionsScreen(
+                    onBackClick = { navController.popBackStack() },
+                    onAddQuestionClick = { navController.navigate(Screen.AdminQuestionEditor.createRoute()) },
+                    onQuestionClick = { questionId ->
+                        navController.navigate(Screen.AdminQuestionEditor.createRoute(questionId))
+                    },
+                )
+            }
+            composable(
+                route = Screen.AdminQuestionEditor.route,
+                arguments = listOf(
+                    navArgument(Screen.ARG_QUESTION_ID) {
+                        type = NavType.StringType
+                        nullable = true
+                        defaultValue = null
+                    },
+                ),
+            ) {
+                AdminQuestionEditorScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable(Screen.AdminChallenges.route) {
+                AdminChallengesScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable(Screen.AdminAchievements.route) {
+                AdminAchievementsScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable(Screen.AdminFeatureFlags.route) {
+                AdminFeatureFlagsScreen(onBackClick = { navController.popBackStack() })
             }
         }
     }

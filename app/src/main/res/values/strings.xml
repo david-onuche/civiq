@@ -161,6 +161,82 @@
     <string name="ai_coach_locked_message">Upgrade to CiviQ Premium to chat with your personal AI tutor about democracy, government, and civic life.</string>
     <string name="ai_coach_upgrade_cta">Go Premium</string>
 
+    <!-- Admin -->
+    <string name="admin_dashboard_title">Admin Dashboard</string>
+    <string name="admin_dashboard_welcome">Welcome, %1$s</string>
+    <string name="admin_access_denied_title">Access Denied</string>
+    <string name="admin_access_denied_message">You don\'t have permission to view this page.</string>
+
+    <string name="admin_role_all">All</string>
+    <string name="admin_role_guest">Guest</string>
+    <string name="admin_role_registered">Registered</string>
+
+    <string name="admin_category_label">Category</string>
+    <string name="admin_difficulty_label">Difficulty</string>
+
+    <string name="admin_users_title">Users</string>
+    <string name="admin_users_subtitle">View and manage user roles</string>
+    <string name="admin_users_empty_title">No users found</string>
+
+    <string name="admin_user_detail_title">User Details</string>
+    <string name="admin_user_detail_not_found">User not found</string>
+    <string name="admin_user_detail_stat_level">Level</string>
+    <string name="admin_user_detail_stat_xp">XP</string>
+    <string name="admin_user_detail_stat_coins">Coins</string>
+    <string name="admin_user_detail_stat_streak">Streak</string>
+    <string name="admin_user_detail_change_role">Change Role</string>
+    <string name="admin_user_detail_save">Save Changes</string>
+    <string name="admin_user_detail_save_success">User role updated</string>
+
+    <string name="admin_questions_title">Question Bank</string>
+    <string name="admin_questions_subtitle">Create, edit, and remove quiz questions</string>
+    <string name="admin_questions_add">Add Question</string>
+    <string name="admin_questions_empty_title">No questions found</string>
+    <string name="admin_questions_delete_title">Delete Question?</string>
+    <string name="admin_questions_delete_message">This question will be permanently removed from the question bank.</string>
+
+    <string name="admin_question_editor_add_title">Add Question</string>
+    <string name="admin_question_editor_edit_title">Edit Question</string>
+    <string name="admin_question_editor_type">Question Type</string>
+    <string name="admin_question_editor_tone">Tone</string>
+    <string name="admin_question_editor_question_label">Question</string>
+    <string name="admin_question_editor_options_label">Answer Options</string>
+    <string name="admin_question_editor_option_label">Option %1$d</string>
+    <string name="admin_question_editor_add_option">Add Option</string>
+    <string name="admin_question_editor_explanation_label">Explanation</string>
+    <string name="admin_question_editor_save">Save Question</string>
+
+    <string name="admin_challenges_title">Daily Challenges</string>
+    <string name="admin_challenges_subtitle">Schedule a featured quiz for a specific day. Questions are selected automatically based on category and difficulty.</string>
+    <string name="admin_challenges_date_label">Date</string>
+    <string name="admin_challenges_title_label">Title</string>
+    <string name="admin_challenges_description_label">Description</string>
+    <string name="admin_challenges_xp_reward_label">XP Reward</string>
+    <string name="admin_challenges_coin_reward_label">Coin Reward</string>
+    <string name="admin_challenges_save">Save Challenge</string>
+    <string name="admin_challenges_save_success">Daily challenge saved</string>
+    <string name="admin_challenges_error_no_questions">No questions available for the selected category and difficulty</string>
+
+    <string name="admin_achievements_title">Achievements</string>
+    <string name="admin_achievements_subtitle">Manage unlockable badges and rewards</string>
+    <string name="admin_achievements_add">Add Achievement</string>
+    <string name="admin_achievements_empty_title">No achievements yet</string>
+    <string name="admin_achievements_delete_title">Delete Achievement?</string>
+    <string name="admin_achievements_delete_message">This achievement definition will be permanently removed. Users who already unlocked it keep their progress.</string>
+    <string name="admin_achievements_editor_add_title">Add Achievement</string>
+    <string name="admin_achievements_editor_edit_title">Edit Achievement</string>
+    <string name="admin_achievements_editor_title_label">Title</string>
+    <string name="admin_achievements_editor_description_label">Description</string>
+    <string name="admin_achievements_editor_icon_label">Icon</string>
+    <string name="admin_achievements_editor_criteria_type_label">Criteria Type</string>
+    <string name="admin_achievements_editor_criteria_value_label">Criteria Value</string>
+    <string name="admin_achievements_editor_xp_reward_label">XP Reward</string>
+    <string name="admin_achievements_editor_coin_reward_label">Coin Reward</string>
+
+    <string name="admin_feature_flags_title">Feature Flags</string>
+    <string name="admin_feature_flags_subtitle">Toggle premium features and experiments</string>
+    <string name="admin_feature_flags_empty">No feature flags configured</string>
+
     <!-- Common -->
     <string name="common_coming_soon">Coming soon</string>
     <string name="common_retry">Retry</string>
@@ -172,4 +248,5 @@
     <string name="common_cancel">Cancel</string>
     <string name="common_save">Save</string>
     <string name="common_done">Done</string>
+    <string name="common_delete">Delete</string>
 </resources>
