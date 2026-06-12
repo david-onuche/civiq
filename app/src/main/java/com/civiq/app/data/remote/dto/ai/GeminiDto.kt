@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class GeminiGenerateContentRequest(
     val contents: List<GeminiContent>,
     val generationConfig: GeminiGenerationConfig? = null,
+    val systemInstruction: GeminiContent? = null,
 )
 
 @Serializable

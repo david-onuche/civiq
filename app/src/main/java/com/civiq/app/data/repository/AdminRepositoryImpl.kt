@@ -7,6 +7,7 @@ import com.civiq.app.data.remote.dto.firestore.QuestionDto
 import com.civiq.app.data.remote.dto.firestore.UserDto
 import com.civiq.app.domain.model.Achievement
 import com.civiq.app.domain.model.DailyChallenge
+import com.civiq.app.domain.model.FeatureFlag
 import com.civiq.app.domain.model.Question
 import com.civiq.app.domain.model.QuizCategory
 import com.civiq.app.domain.model.User
@@ -80,6 +81,18 @@ class AdminRepositoryImpl @Inject constructor(
                 trySend(Resource.Success(questions))
             }
         awaitClose { registration.remove() }
+    }
+
+    override suspend fun getQuestion(questionId: String): Resource<Question> = try {
+        val snapshot = firestore.collection(FirestoreCollections.QUESTIONS).document(questionId).get().await()
+        val dto = snapshot.toObject(QuestionDto::class.java)
+        if (dto != null) {
+            Resource.Success(dto.toDomain())
+        } else {
+            Resource.Error(UiText.DynamicString("Question not found"))
+        }
+    } catch (e: Exception) {
+        Resource.Error(UiText.DynamicString(e.localizedMessage ?: "Failed to load question"))
     }
 
     override suspend fun createQuestion(question: Question): Resource<Question> = try {
@@ -159,5 +172,14 @@ class AdminRepositoryImpl @Inject constructor(
         Resource.Success(Unit)
     } catch (e: Exception) {
         Resource.Error(UiText.DynamicString(e.localizedMessage ?: "Failed to delete achievement"))
+    }
+
+    override suspend fun updateFeatureFlag(flag: FeatureFlag): Resource<Unit> = try {
+        firestore.collection(FirestoreCollections.FEATURE_FLAGS).document(flag.key)
+            .set(flag.toDto())
+            .await()
+        Resource.Success(Unit)
+    } catch (e: Exception) {
+        Resource.Error(UiText.DynamicString(e.localizedMessage ?: "Failed to update feature flag"))
     }
 }

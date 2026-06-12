@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.MonetizationOn
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -80,6 +81,7 @@ import java.util.Calendar
 fun HomeScreen(
     onStartQuiz: (category: QuizCategory, difficulty: QuestionDifficulty, challengeId: String?) -> Unit,
     onNavigateToQuizHub: () -> Unit,
+    onNavigateToNotifications: () -> Unit,
     onSignedOut: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
     authViewModel: AuthViewModel = hiltViewModel(),
@@ -96,6 +98,12 @@ fun HomeScreen(
             CiviQTopAppBar(
                 title = stringResource(R.string.app_name),
                 actions = {
+                    IconButton(onClick = onNavigateToNotifications) {
+                        Icon(
+                            imageVector = Icons.Filled.Notifications,
+                            contentDescription = stringResource(R.string.notifications_title),
+                        )
+                    }
                     IconButton(onClick = { authViewModel.onEvent(AuthUiEvent.SignOut) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.Logout,

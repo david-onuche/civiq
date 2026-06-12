@@ -10,6 +10,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.civiq.app.R
 import com.civiq.app.domain.model.QuizCategory
+import com.civiq.app.presentation.achievements.AchievementsScreen
+import com.civiq.app.presentation.aicoach.AiCoachScreen
+import com.civiq.app.presentation.challenges.ChallengesScreen
+import com.civiq.app.presentation.components.CiviQTopAppBar
 import com.civiq.app.presentation.home.HomeScreen
+import com.civiq.app.presentation.leaderboard.LeaderboardScreen
+import com.civiq.app.presentation.notifications.NotificationsScreen
+import com.civiq.app.presentation.premium.PremiumScreen
+import com.civiq.app.presentation.profile.ProfileScreen
 import com.civiq.app.presentation.quiz.QuizDifficultySelectScreen
 import com.civiq.app.presentation.quiz.QuizHistoryScreen
 import com.civiq.app.presentation.quiz.QuizHubScreen
@@ -37,12 +46,17 @@ import com.civiq.app.utils.safeEnumValueOf
  * Profile) behind their own [NavHost], nested inside [CiviQNavGraph]'s
  * [NavGraphs.MAIN] destination.
  *
- * Destinations not yet implemented render [ComingSoonScreen] as a temporary
- * placeholder; each is replaced with its real screen as later phases land.
+ * Sub-screens not yet implemented render [ComingSoonDetailScreen] as a
+ * temporary placeholder; each is replaced with its real screen as later
+ * phases land.
  */
 @Composable
-fun MainScreen(onSignedOut: () -> Unit) {
+fun MainScreen(onSignedOut: () -> Unit, pendingDeepLinkRoute: String? = null) {
     val navController = rememberNavController()
+
+    LaunchedEffect(pendingDeepLinkRoute) {
+        pendingDeepLinkRoute?.let { route -> navController.navigate(route) }
+    }
 
     Scaffold(
         bottomBar = { CiviQBottomNavigationBar(navController) },
@@ -58,6 +72,7 @@ fun MainScreen(onSignedOut: () -> Unit) {
                         navController.navigate(Screen.QuizPlay.createRoute(category.name, difficulty.name, challengeId))
                     },
                     onNavigateToQuizHub = { navController.navigateToBottomNavRoute(Screen.QuizHub.route) },
+                    onNavigateToNotifications = { navController.navigate(Screen.Notifications.route) },
                     onSignedOut = onSignedOut,
                 )
             }
@@ -122,14 +137,56 @@ fun MainScreen(onSignedOut: () -> Unit) {
             composable(Screen.QuizHistory.route) {
                 QuizHistoryScreen(onBackClick = { navController.popBackStack() })
             }
+            composable(Screen.Achievements.route) {
+                AchievementsScreen(onBackClick = { navController.popBackStack() })
+            }
             composable(Screen.Challenges.route) {
-                ComingSoonScreen(title = stringResource(R.string.nav_challenges))
+                ChallengesScreen(
+                    onStartChallenge = { category, difficulty, challengeId ->
+                        navController.navigate(Screen.QuizPlay.createRoute(category.name, difficulty.name, challengeId))
+                    },
+                )
             }
             composable(Screen.Leaderboard.route) {
-                ComingSoonScreen(title = stringResource(R.string.nav_leaderboard))
+                LeaderboardScreen()
             }
             composable(Screen.Profile.route) {
-                ComingSoonScreen(title = stringResource(R.string.nav_profile))
+                ProfileScreen(
+                    onSignedOut = onSignedOut,
+                    onNavigateToQuizHistory = { navController.navigate(Screen.QuizHistory.route) },
+                    onNavigateToAchievements = { navController.navigate(Screen.Achievements.route) },
+                    onNavigateToEditProfile = { navController.navigate(Screen.EditProfile.route) },
+                    onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
+                    onNavigateToPremium = { navController.navigate(Screen.Premium.route) },
+                    onNavigateToAiCoach = { navController.navigate(Screen.AiCoach.route) },
+                )
+            }
+            composable(Screen.EditProfile.route) {
+                ComingSoonDetailScreen(
+                    title = stringResource(R.string.profile_menu_edit_profile),
+                    onBackClick = { navController.popBackStack() },
+                )
+            }
+            composable(Screen.Settings.route) {
+                ComingSoonDetailScreen(
+                    title = stringResource(R.string.profile_menu_settings),
+                    onBackClick = { navController.popBackStack() },
+                )
+            }
+            composable(Screen.Notifications.route) {
+                NotificationsScreen(
+                    onBackClick = { navController.popBackStack() },
+                    onNotificationClick = { route -> navController.navigate(route) },
+                )
+            }
+            composable(Screen.Premium.route) {
+                PremiumScreen(onBackClick = { navController.popBackStack() })
+            }
+            composable(Screen.AiCoach.route) {
+                AiCoachScreen(
+                    onBackClick = { navController.popBackStack() },
+                    onNavigateToPremium = { navController.navigate(Screen.Premium.route) },
+                )
             }
         }
     }
@@ -167,10 +224,19 @@ private fun NavHostController.navigateToBottomNavRoute(route: String) {
     }
 }
 
-/** Placeholder for bottom-nav destinations not yet implemented. */
+/** Placeholder for sub-screens not yet implemented, with a top bar so users can navigate back. */
 @Composable
-private fun ComingSoonScreen(title: String) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
+private fun ComingSoonDetailScreen(title: String, onBackClick: () -> Unit) {
+    Scaffold(
+        topBar = { CiviQTopAppBar(title = title, onBackClick = onBackClick) },
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(text = stringResource(R.string.common_coming_soon), style = MaterialTheme.typography.titleMedium)
+        }
     }
 }

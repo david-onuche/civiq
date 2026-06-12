@@ -2,6 +2,7 @@ package com.civiq.app.domain.repository
 
 import com.civiq.app.domain.model.Achievement
 import com.civiq.app.domain.model.DailyChallenge
+import com.civiq.app.domain.model.FeatureFlag
 import com.civiq.app.domain.model.Question
 import com.civiq.app.domain.model.QuizCategory
 import com.civiq.app.domain.model.User
@@ -22,6 +23,8 @@ interface AdminRepository {
 
     fun observeAllQuestions(category: QuizCategory? = null, limit: Int = 100): Flow<Resource<List<Question>>>
 
+    suspend fun getQuestion(questionId: String): Resource<Question>
+
     suspend fun createQuestion(question: Question): Resource<Question>
 
     suspend fun updateQuestion(question: Question): Resource<Unit>
@@ -37,4 +40,6 @@ interface AdminRepository {
     suspend fun updateAchievement(achievement: Achievement): Resource<Unit>
 
     suspend fun deleteAchievement(achievementId: String): Resource<Unit>
+
+    suspend fun updateFeatureFlag(flag: FeatureFlag): Resource<Unit>
 }

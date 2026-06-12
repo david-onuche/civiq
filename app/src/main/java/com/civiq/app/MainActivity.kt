@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.civiq.app.navigation.CiviQNavGraph
 import com.civiq.app.presentation.theme.CiviQTheme
+import com.civiq.app.services.notifications.EXTRA_DEEP_LINK_ROUTE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,10 +28,12 @@ class MainActivity : ComponentActivity() {
             ),
         )
 
+        val pendingDeepLinkRoute = intent.getStringExtra(EXTRA_DEEP_LINK_ROUTE)
+
         setContent {
             CiviQTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    CiviQNavGraph()
+                    CiviQNavGraph(pendingDeepLinkRoute = pendingDeepLinkRoute)
                 }
             }
         }

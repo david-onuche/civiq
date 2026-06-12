@@ -16,9 +16,16 @@ import com.civiq.app.presentation.auth.SplashScreen
  * flow (Login/Register/ForgotPassword), or the main app ([NavGraphs.MAIN],
  * see [MainScreen]). Successful auth and sign-out clear the back stack so the
  * system back button never returns to a stale auth/main screen.
+ *
+ * [pendingDeepLinkRoute], if non-null, comes from a tapped push notification
+ * (see [com.civiq.app.services.notifications.EXTRA_DEEP_LINK_ROUTE]) and is
+ * forwarded to [MainScreen], which navigates to it once signed in.
  */
 @Composable
-fun CiviQNavGraph(navController: NavHostController = rememberNavController()) {
+fun CiviQNavGraph(
+    navController: NavHostController = rememberNavController(),
+    pendingDeepLinkRoute: String? = null,
+) {
     NavHost(navController = navController, startDestination = Screen.Splash.route) {
         composable(Screen.Splash.route) {
             SplashScreen(
@@ -78,6 +85,7 @@ fun CiviQNavGraph(navController: NavHostController = rememberNavController()) {
                 onSignedOut = {
                     navController.navigate(Screen.Login.route) { popUpTo(0) }
                 },
+                pendingDeepLinkRoute = pendingDeepLinkRoute,
             )
         }
     }

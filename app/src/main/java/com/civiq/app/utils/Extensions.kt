@@ -55,6 +55,9 @@ fun Long.isSameDayAs(other: Long): Boolean = this.startOfDay() == other.startOfD
 /** Formats today's date as "yyyy-MM-dd" for use as a Firestore document ID (e.g. daily challenges). */
 fun Long.toDateId(): String = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(this))
 
+/** Formats epoch millis as an absolute date, e.g. "Jun 12, 2026" (used for subscription renewal/expiry dates). */
+fun Long.toFormattedDate(): String = SimpleDateFormat("MMM d, yyyy", Locale.getDefault()).format(Date(this))
+
 /**
  * Parses [name] as an enum constant of [T], falling back to [default] if
  * [name] is blank or doesn't match a constant. Used when mapping Firestore

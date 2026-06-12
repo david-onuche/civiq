@@ -31,7 +31,7 @@ import javax.inject.Singleton
 /**
  * Binds each [domain repository][com.civiq.app.domain.repository] interface
  * to its Firebase-backed implementation. Note: [com.civiq.app.domain.repository.AiQuizRepository]
- * is bound separately in `AiModule` once its implementation is added (Phase 8).
+ * is bound separately in `AiModule`.
  */
 @Module
 @InstallIn(SingletonComponent::class)
