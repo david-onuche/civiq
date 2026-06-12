@@ -47,7 +47,7 @@ coroutinesTest = "1.9.0"
 turbine = "1.2.0"
 truth = "1.4.4"
 androidxTestExt = "1.2.1"
-espresso = "3.6.1"
+espresso = "3.7.0"
 archCoreTesting = "2.2.0"
 
 # Misc
